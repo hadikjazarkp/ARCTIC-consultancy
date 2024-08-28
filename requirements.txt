@@ -28,7 +28,6 @@ Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1
 future==0.18.2
 greenlet==3.0.3
-gyp==0.1
 httplib2==0.20.2
 idna==3.3
 importlib-metadata==4.6.4
