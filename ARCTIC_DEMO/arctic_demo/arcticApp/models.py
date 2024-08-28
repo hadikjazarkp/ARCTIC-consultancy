@@ -1,5 +1,17 @@
 from django.db import models
 
+
+from django.db import models
+
+class SliderImage(models.Model):
+    image = models.ImageField(upload_to='slider_images/')
+    caption = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.caption if self.caption else f"Image {self.id}"
+
+
+
 # Create your models here.
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -10,6 +22,19 @@ class Country(models.Model):
     def __str__(self):
         return self.name
     
+
+class ProductCard(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='product_images/')
+    url_name = models.CharField(max_length=100)  # Store the name of the URL pattern
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse(self.url_name)
+
 
 class Review(models.Model):
     name = models.CharField(max_length=100)  # Name of the reviewer or review title

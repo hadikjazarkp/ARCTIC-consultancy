@@ -15,10 +15,14 @@ from .models import (
     Education,
     ContentBO,
     ShoeCleaningService,
-    Blog, MediaContent, Question, Answer
+    Blog, MediaContent, Question, Answer, SliderImage, ProductCard
 
     
 )
+
+admin.site.register(SliderImage)
+
+admin.site.register(ProductCard)
 
 # Registering the Country model
 admin.site.register(Country)

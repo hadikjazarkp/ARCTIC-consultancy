@@ -1,10 +1,12 @@
 # views.py
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Country,Customer, Review, ShoeCleaningService, Contact, Question, Answer, TravelReview, Blog, MediaReview, MediaContent, laundryReview, StudyReview, Contact, TeamMember, Education, ContentBO
+from .models import Country,Customer,ProductCard, Review, ShoeCleaningService,SliderImage, Contact, Question, Answer, TravelReview, Blog, MediaReview, MediaContent, laundryReview, StudyReview, Contact, TeamMember, Education, ContentBO
 from django.shortcuts import render, get_object_or_404
 
 def home(request):
+    slider_images = SliderImage.objects.all()
+    product_cards = ProductCard.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -16,7 +18,7 @@ def home(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('home')
     team_members = TeamMember.objects.all()
-    return render(request, 'home.html', {'team_members': team_members})
+    return render(request, 'home.html', {'team_members': team_members, 'slider_images': slider_images, 'product_cards': product_cards})
 
 def work_page(request):
     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]

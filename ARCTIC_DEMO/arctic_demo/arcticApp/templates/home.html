@@ -6,22 +6,14 @@
 <header class="w3-display-container w3-content w3-wide" style="max-width:100%;" id="home">
   <!-- Slider -->
   <div class="w3-content w3-display-container">
+    {% for slider_image in slider_images %}
     <div class="w3-slide">
       <div class="w3-image-overlay">
-        <img class="w3-image" src="{% static 'images/studyimage.jpeg' %}" alt="Architecture 1" style="width:100%">
+        <img class="w3-image" src="{{ slider_image.image.url }}" alt="{{ slider_image.caption }}" style="width:100%">
       </div>
     </div>
-    <div class="w3-slide">
-      <div class="w3-image-overlay">
-        <img class="w3-image" src="{% static 'images/__.jpeg' %}" alt="Architecture 2" style="width:100%">
-      </div>
-    </div>
-    <div class="w3-slide">
-      <div class="w3-image-overlay">
-        <img class="w3-image" src="{% static 'images/luffy.jpeg' %}" alt="Architecture 3" style="width:100%">
-      </div>
-    </div>
-
+    {% endfor %}
+    
     <!-- Next/Previous buttons -->
     <a class="w3-button w3-display-left w3-hover-text-white" onclick="plusSlides(-1)">&#10094;</a>
     <a class="w3-button w3-display-right w3-hover-text-white" onclick="plusSlides(1)">&#10095;</a>
@@ -68,77 +60,26 @@
       &#10095;
   </button>
         
-      <div class="product-container">
-          <div class="product-card">
-              <div class="box">
-                  <a href="{% url 'travel_page' %}" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/travel.jpeg' %}" alt="Travel" class="box-image">
-                          <h2 class="box-title">TRAVEL</h2>
-                          <p class="box-description">Discover the world with Arctic's travel services.We provide everything from domestic and international travel...</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="box">
-                  <a href="{% url 'health_page' %}" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/health.jpeg' %}" alt="Health" class="box-image">
-                          <h2 class="box-title">HEALTH</h2>
-                          <p class="box-description">Prioritize your well-being with our customized health services. We provide tailored diet plans....</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="box">
-                  <a href="{% url 'study_page' %}" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/study.jpeg' %}" alt="Study" class="box-image">
-                          <h2 class="box-title">STUDY</h2>
-                          <p class="box-description">Whether you're pursuing international or domestic education, Arctic is here to guide you....</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="box">
-                  <a href="#" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/work.jpeg' %}" alt="Work" class="box-image">
-                          <h2 class="box-title">WORK</h2>
-                          <p class="box-description">At Arctic, we simplify the process of obtaining work visas and support you in your career developing....</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="box">
-                  <a href="{% url 'media_page' %}" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/media3.jpeg' %}" alt="Media" class="box-image">
-                          <h2 class="box-title">MEDIA</h2>
-                          <p class="box-description">Our media services cover everything from digital marketing and web development to...</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="box">
-                  <a href="{% url 'shoes_laundry_page' %}" class="box-link">
-                      <div class="box-content">
-                          <img src="{% static 'images/shoes4.jpeg' %}" alt="Shoes Laundry" class="box-image">
-                          <h2 class="box-title">LAUNDRY</h2>
-                          <p class="box-description">Keep your footwear looking their best with our Shoelaundry service. We offer a range of packages to...</p>
-                      </div>
-                  </a>
-              </div>
-          </div>
-      </div>
+  <div class="product-container">
+    {% for product in product_cards %}
+    <div class="product-card">
+        <div class="box">
+            <a href="{{ product.get_absolute_url }}" class="box-link">
+                <div class="box-content">
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="box-image">
+                    <h2 class="box-title">{{ product.title }}</h2>
+                    <p class="box-description">{{ product.description }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
   </section>
 
 </div>
+
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       const productContainers = [...document.querySelectorAll('.product-container')];
