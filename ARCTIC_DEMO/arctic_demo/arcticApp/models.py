@@ -35,6 +35,27 @@ class ProductCard(models.Model):
     def get_absolute_url(self):
         return reverse(self.url_name)
 
+class SiteLogo(models.Model):
+    image = models.ImageField(upload_to='site_logo/')
+
+    def __str__(self):
+        return "Site Logo"
+
+
+class Founder(models.Model):
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='founders_images/')
+    description_1 = models.TextField()
+    description_2 = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
 
 class Review(models.Model):
     name = models.CharField(max_length=100)  # Name of the reviewer or review title
@@ -58,6 +79,13 @@ class TravelReview(models.Model):
         return self.name
     
     
+class DisplayImage(models.Model):
+    image = models.ImageField(upload_to='display_images/')
+    alt_text = models.CharField(max_length=255, default="")
+
+    def __str__(self):
+        return self.alt_text 
+ 
  
 class Customer(models.Model):
     full_name = models.CharField(max_length=255)
@@ -175,7 +203,22 @@ class ShoeCleaningService(models.Model):
         return self.get_service_type_display()
     
     
-    
+
+
+class ShoeService(models.Model):
+    SERVICE_CHOICES = [
+        ('deep_cleaning', 'Deep Cleaning'),
+        ('shoe_polishing', 'Shoe Polishing'),
+        ('odor_removal', 'Odor Removal'),
+        ('waterproofing', 'Waterproofing'),
+    ]
+
+    service_type = models.CharField(max_length=50, choices=SERVICE_CHOICES)
+    image = models.ImageField(upload_to='services/')
+    description = models.TextField()
+
+    def __str__(self):
+        return self.get_service_type_display()    
 from django.urls import reverse
 
 class Blog(models.Model):

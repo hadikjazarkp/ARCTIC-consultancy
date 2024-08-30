@@ -387,7 +387,7 @@
   }
 </style>
 
-<!-- About Section -->
+{% comment %} <!-- About Section -->
 <div class="w3-row w3-padding-64" style="background-color: #fff; border-radius: 40px; margin-top: 10px;">
   <div class="w3-col m6 w3-padding-large">
       <img src="{% static 'images/insaf.JPG' %}" class="w3-round w3-image" alt="Founder" width="600" height="650">
@@ -413,6 +413,39 @@
   <div class="w3-col m6 w3-padding-large">
       <img src="{% static 'images/sana.JPG' %}" class="w3-round w3-image" alt="Co-Founder" width="600" height="750">
   </div>
+</div> {% endcomment %}
+
+
+<!-- About Section -->
+<div class="w3-row w3-padding-64" style="background-color: #fff; border-radius: 40px; margin-top: 10px;">
+  {% for founder in founders %}
+      <div class="w3-row w3-padding-16">
+          {% if forloop.counter0|divisibleby:2 %}
+              <!-- Image on the Left, Text on the Right -->
+              <div class="w3-col m6 w3-padding-large">
+                  <img src="{{ founder.image.url }}" class="w3-round w3-image" alt="{{ founder.title }}" width="600" height="650">
+              </div>
+              <div class="w3-col m6 w3-padding-large">
+                  <h1 class="w3-center">Meet the {{ founder.title }}</h1><br>
+                  <h5 class="w3-center">{{ founder.name }}</h5>
+                  <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_1 }}</p>
+                  <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_2 }}</p>
+              </div>
+          {% else %}
+              <!-- Text on the Left, Image on the Right -->
+              <div class="w3-col m6 w3-padding-large">
+                  <h1 class="w3-center">Meet the {{ founder.title }}</h1><br>
+                  <h5 class="w3-center">{{ founder.name }}</h5>
+                  <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_1 }}</p>
+                  <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_2 }}</p>
+              </div>
+              <div class="w3-col m6 w3-padding-large">
+                  <img src="{{ founder.image.url }}" class="w3-round w3-image" alt="{{ founder.title }}" width="600" height="650">
+              </div>
+          {% endif %}
+      </div>
+      <hr style="border-top: 1px solid #ccc;">
+  {% endfor %}
 </div>
 
 <hr>

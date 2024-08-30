@@ -1,35 +1,30 @@
 from django.contrib import admin
 from django.contrib import messages
-
-from .models import (
-    Country,
-    Review,
-    TravelReview,
-    StudyReview,
-    MediaReview,
-    laundryReview,
-    healthReview,
-    Customer,
-    Contact,
-    TeamMember,
-    Education,
-    ContentBO,
-    ShoeCleaningService,
-    Blog, MediaContent, Question, Answer, SliderImage, ProductCard
-
-    
-)
+from .models import *
 
 admin.site.register(SliderImage)
 
 admin.site.register(ProductCard)
 
+admin.site.register(Founder)
+
+admin.site.register(SiteLogo)
+
+admin.site.register(DisplayImage)
 # Registering the Country model
 admin.site.register(Country)
 
 # Registering the Review model
 admin.site.register(Review)
 
+
+@admin.register(ShoeService)
+class ShoeServiceAdmin(admin.ModelAdmin):
+    list_display = ('service_type', 'image', 'description')
+    search_fields = ('service_type',)
+    list_per_page = 10
+    
+    
 # Registering the TravelReview model with custom admin settings
 @admin.register(TravelReview)
 class TravelReviewAdmin(admin.ModelAdmin):

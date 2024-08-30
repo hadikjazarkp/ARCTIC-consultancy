@@ -1,12 +1,14 @@
 # views.py
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Country,Customer,ProductCard, Review, ShoeCleaningService,SliderImage, Contact, Question, Answer, TravelReview, Blog, MediaReview, MediaContent, laundryReview, StudyReview, Contact, TeamMember, Education, ContentBO
+from .models import *
 from django.shortcuts import render, get_object_or_404
 
 def home(request):
     slider_images = SliderImage.objects.all()
     product_cards = ProductCard.objects.all()
+    site_logo = SiteLogo.objects.all()
+    founders = Founder.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -18,10 +20,12 @@ def home(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('home')
     team_members = TeamMember.objects.all()
-    return render(request, 'home.html', {'team_members': team_members, 'slider_images': slider_images, 'product_cards': product_cards})
+    return render(request, 'home.html', {'site_logo':site_logo, 'team_members': team_members, 'slider_images': slider_images, 'product_cards': product_cards, 'founders':founders})
 
 def work_page(request):
     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]
+    site_logo = SiteLogo.objects.all()
+
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -33,9 +37,10 @@ def work_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('work_page')
 
-    return render(request, 'work.html', {'reviews': latest_reviews})
+    return render(request, 'work.html', {'reviews': latest_reviews, 'site_logo':site_logo})
 
 def study_page(request):
+    site_logo = SiteLogo.objects.all()
     latest_reviews = StudyReview.objects.all().order_by('-id')[:3]
     content_boxes = ContentBO.objects.all()  # Ensure the model name is correct
     if request.method == 'POST':
@@ -48,11 +53,13 @@ def study_page(request):
         
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('study_page')
+    site_logo = site_logo = SiteLogo.objects.all()
     abroad_educations = Education.objects.filter(education_type='abroad')
     distance_educations = Education.objects.filter(education_type='distance')
     domestic_educations = Education.objects.filter(education_type='domestic')
 
     context = {
+        'site_logo':site_logo,
         'reviews': latest_reviews,
         'abroad_educations': abroad_educations,
         'distance_educations': distance_educations,
@@ -62,7 +69,9 @@ def study_page(request):
     return render(request, 'study.html', context)
 
 def travel_page(request):
+    site_logo = SiteLogo.objects.all()
     countries = Country.objects.all()
+    images = DisplayImage.objects.all()
     reviews = Review.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -75,7 +84,7 @@ def travel_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('travel_page')
 
-    return render(request, 'travel.html', {'countries': countries, 'reviews': reviews})
+    return render(request, 'travel.html', {'countries': countries, 'reviews': reviews, 'site_logo':site_logo, 'images':images})
 
 # def health_page(request):
 #     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]
@@ -93,6 +102,8 @@ def travel_page(request):
 #     return render(request, 'health.html', {'reviews': latest_reviews})
 
 def health_page(request):
+    site_logo = SiteLogo.objects.all()
+    
     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]
     questions = Question.objects.all()
 
@@ -108,7 +119,7 @@ def health_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('health_page')
 
-    return render(request, 'health.html', {'reviews': latest_reviews, 'questions': questions})
+    return render(request, 'health.html', {'reviews': latest_reviews, 'questions': questions, 'site_logo':site_logo})
 
 def save_answers(request):
     questions = Question.objects.all()
@@ -127,6 +138,8 @@ def save_answers(request):
 
 
 def media_page(request):
+    site_logo = SiteLogo.objects.all()
+    
     # Assuming MediaReview model exists, otherwise remove this line
     latest_reviews = MediaReview.objects.all().order_by('-id')[:3]
     blogs = Blog.objects.all()
@@ -143,17 +156,21 @@ def media_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('media_page')
 
-    return render(request, 'media.html', {'reviews': latest_reviews, 'blogs': blogs, 'media_contents': media_contents})
+    return render(request, 'media.html', {'reviews': latest_reviews, 'blogs': blogs, 'media_contents': media_contents, 'site_logo':site_logo})
 
 
 def blog_detail(request, pk):
+    site_logo = SiteLogo.objects.all()
+    
     blog = get_object_or_404(Blog, pk=pk)
     media_contents = blog.media_contents.all()
-    return render(request, 'blog_detail.html', {'blog': blog, 'media_contents': media_contents})
+    return render(request, 'blog_detail.html', {'blog': blog, 'media_contents': media_contents, 'site_logo':site_logo})
 
 
 
 def shoes_laundry_page(request):
+    site_logo = SiteLogo.objects.all()
+    servicesimg = ShoeService.objects.all()
     latest_reviews = laundryReview.objects.all().order_by('-id')[:3]
     services = ShoeCleaningService.objects.all()
 
@@ -168,12 +185,14 @@ def shoes_laundry_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('shoes_laundry_page')
 
-    return render(request, 'shoes_laundry.html', {'reviews': latest_reviews, 'services': services})
+    return render(request, 'shoes_laundry.html', {'reviews': latest_reviews, 'services': services, 'site_logo':site_logo, 'servicesimg':servicesimg})
 
 
 
 
 def register_customer(request):
+    site_logo = SiteLogo.objects.all()
+    
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
@@ -194,4 +213,4 @@ def register_customer(request):
         whatsapp_url = 'https://wa.me/917025646518?text=Hello, Sir'
         return redirect(whatsapp_url)
 
-    return render(request, 'register.html')
+    return render(request, 'register.html', {'site_logo':site_logo})
