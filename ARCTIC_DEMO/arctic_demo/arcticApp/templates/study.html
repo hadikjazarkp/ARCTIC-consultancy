@@ -258,7 +258,18 @@
         color: #333;
         margin-bottom: 10px;
     }
-
+    .swipe-item .education-link:hover {
+        background-color: #0056b3;
+    } 
+    .swipe-item .education-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
     .arrow {
         position: absolute;
         top: 50%;
@@ -312,7 +323,19 @@
         transform: translateY(-5px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
+    .domestic-box .education-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
 
+    .domestic-box .education-link:hover {
+        background-color: #0056b3;
+    }
     .domestic-box img {
         width: 120px;
         height: 120px;
@@ -340,7 +363,7 @@
         <div class="education-box">
             <img src="{{ item.image.url }}" alt="{{ item.education_name }}">
             <div class="education-name">{{ item.education_name }}</div>
-            <a href="#" class="education-link">Learn More</a>
+            <a href="{% url 'registration' %}" class="education-link">Learn More</a>
         </div>
     {% empty %}
         <p>No abroad education data available.</p>
@@ -361,6 +384,7 @@
             <div class="swipe-item">
                 <img src="{{ item.image.url }}" alt="{{ item.education_name }}">
                 <div class="swipe-name">{{ item.education_name }}</div>
+                <a href="{% url 'registration' %}" class="education-link">Learn More</a>
             </div>
         {% endfor %}
     </div>
@@ -376,6 +400,7 @@
                 <img src="{{ item.image.url }}" alt="{{ item.education_name }}">
                 <div class="education-name">{{ item.education_name }}</div>
                 <div class="education-description">{{ item.description }}</div>
+                <a href="{% url 'registration' %}" class="education-link">Learn More</a>
             </div>
         {% empty %}
             <p>No domestic education data available.</p>
