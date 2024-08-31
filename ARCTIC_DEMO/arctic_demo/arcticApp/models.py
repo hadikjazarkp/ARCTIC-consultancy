@@ -268,3 +268,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Answer to {self.question}"    
+    
+    
+class AlertImage(models.Model):
+    image = models.ImageField(upload_to='alerts/')    

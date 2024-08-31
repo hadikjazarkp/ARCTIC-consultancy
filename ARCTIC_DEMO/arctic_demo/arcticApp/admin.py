@@ -17,6 +17,7 @@ admin.site.register(Country)
 # Registering the Review model
 admin.site.register(Review)
 
+admin.site.register(AlertImage)
 
 @admin.register(ShoeService)
 class ShoeServiceAdmin(admin.ModelAdmin):

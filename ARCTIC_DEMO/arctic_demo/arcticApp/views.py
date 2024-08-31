@@ -9,6 +9,7 @@ def home(request):
     product_cards = ProductCard.objects.all()
     site_logo = SiteLogo.objects.all()
     founders = Founder.objects.all()
+    alert_image = AlertImage.objects.first()
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -20,7 +21,7 @@ def home(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('home')
     team_members = TeamMember.objects.all()
-    return render(request, 'home.html', {'site_logo':site_logo, 'team_members': team_members, 'slider_images': slider_images, 'product_cards': product_cards, 'founders':founders})
+    return render(request, 'home.html', {'site_logo':site_logo, 'team_members': team_members, 'slider_images': slider_images, 'product_cards': product_cards, 'founders':founders, 'alert_image':alert_image})
 
 def work_page(request):
     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]
