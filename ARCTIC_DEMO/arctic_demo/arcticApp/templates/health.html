@@ -595,9 +595,11 @@ body {
 
 
       </div>
-      <div class="header__image">
-        <img src="{% static 'images/header.png' %}" alt="header" />
-      </div>
+<div class="header__image">
+    {% with header_image as image %}
+        <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" />
+    {% endwith %}
+</div>
     </header>
 
     <section class="section__container explore__container">
@@ -649,11 +651,17 @@ body {
     </section>
 
     <section class="section__container class__container">
-      <div class="class__image">
+      {% comment %} <div class="class__image">
         <span class="bg__blur"></span>
         <img src="{% static 'images/class-1.jpg' %}" alt="class" class="class__img-1" />
         <img src="{% static 'images/class-2.jpg' %}" alt="class" class="class__img-2" />
-      </div>
+      </div> {% endcomment %}
+      <div class="class__image">
+        <span class="bg__blur"></span>
+        {% for image in class_images %}
+            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="{{ image.css_class }}" />
+        {% endfor %}
+    </div>
       <div class="class__content">
         <h2 class="section__header">THE CLASS YOU WILL GET HERE</h2>
         <p>
@@ -675,7 +683,10 @@ body {
         atmosphere, where you can make friends and stay motivated.
       </p>
       <div class="join__image">
-        <img src="{% static 'images/join.jpg' %}" alt="Join" />
+        {% comment %} <img src="{% static 'images/join.jpg' %}" alt="Join" /> {% endcomment %}
+        {% for img in images %}
+    <img src="{{ img.image.url }}" alt="{{ img.title }}" />
+{% endfor %}
         <div class="join__grid">
           <div class="join__card">
             <span><i class="ri-user-star-fill"></i></span>

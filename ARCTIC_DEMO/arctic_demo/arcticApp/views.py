@@ -104,10 +104,11 @@ def travel_page(request):
 
 def health_page(request):
     site_logo = SiteLogo.objects.all()
-    
+    images = HealthImage.objects.all()
     latest_reviews = TravelReview.objects.all().order_by('-id')[:3]
     questions = Question.objects.all()
-
+    header_image = HealthHeaderImage.objects.first()
+    class_images = ClassImage.objects.all()
     if request.method == 'POST':
         # Handle contact form submission
         name = request.POST.get('name')
@@ -120,7 +121,7 @@ def health_page(request):
         messages.success(request, 'Thank you for getting in touch!')
         return redirect('health_page')
 
-    return render(request, 'health.html', {'reviews': latest_reviews, 'questions': questions, 'site_logo':site_logo})
+    return render(request, 'health.html', {'reviews': latest_reviews,'images':images, 'questions': questions, 'site_logo':site_logo, 'header_image':header_image, 'class_images':class_images})
 
 def save_answers(request):
     questions = Question.objects.all()

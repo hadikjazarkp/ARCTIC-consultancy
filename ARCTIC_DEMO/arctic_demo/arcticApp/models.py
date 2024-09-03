@@ -272,3 +272,28 @@ class Answer(models.Model):
     
 class AlertImage(models.Model):
     image = models.ImageField(upload_to='alerts/')    
+    
+    
+
+class HealthHeaderImage(models.Model):
+    image = models.ImageField(upload_to='header_images/')
+    alt_text = models.CharField(max_length=100, default='header')
+
+    def __str__(self):
+        return self.alt_text
+
+
+class ClassImage(models.Model):
+    image = models.ImageField(upload_to='class_images/')
+    alt_text = models.CharField(max_length=100, default='class')
+    css_class = models.CharField(max_length=50, default='class__img-1')
+
+    def __str__(self):
+        return self.alt_text    
+    
+class HealthImage(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title    

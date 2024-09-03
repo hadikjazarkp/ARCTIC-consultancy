@@ -19,6 +19,12 @@ admin.site.register(Review)
 
 admin.site.register(AlertImage)
 
+admin.site.register(ClassImage)
+
+admin.site.register(HealthImage)
+
+admin.site.register(HealthHeaderImage)
+
 @admin.register(ShoeService)
 class ShoeServiceAdmin(admin.ModelAdmin):
     list_display = ('service_type', 'image', 'description')
