@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['3.92.20.58', '13.126.11.82', 'localhost', '127.0.0.1', '0.0.0.0']
 
 # ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = ['https://arctic-consultancy.com']
 
 
 # Application definition
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
