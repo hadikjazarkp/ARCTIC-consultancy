@@ -9,7 +9,7 @@
     {% for slider_image in slider_images %}
     <div class="w3-slide" style="display: inline-block; width: 100%;">
       <div class="w3-image-overlay" style="width: 100%;">
-        <img class="w3-image" src="{{ slider_image.image.url }}" alt="{{ slider_image.caption }}" style="width: 100%; height: 800px;">
+        <img class="w3-image" src="{{ slider_image.image.url }}" alt="{{ slider_image.caption }}" style="width: 100%; height: auto;">
       </div>
     </div>
     {% endfor %}
@@ -20,10 +20,10 @@
 </div>
 
   
-  <!-- Slider Caption -->
+  {% comment %} <!-- Slider Caption -->
   <div class="w3-display-middle w3-margin-top w3-center">
     <h1 class="w3-xxlarge w3-text-black"><span class="w3-padding w3-white w3-opacity-min"><b>ARCTIC</b></span> <br><span class="w3-hide-small w3-text-light-grey">The One Stop Solution</span></h1>
-  </div>
+  </div> {% endcomment %}
 </header>
 
 <style>
@@ -417,6 +417,7 @@
 </div> {% endcomment %}
 
 
+
 <!-- About Section -->
 <div class="w3-row w3-padding-64" style="background-color: #fff; border-radius: 40px; margin-top: 10px;">
   {% for founder in founders %}
@@ -427,7 +428,7 @@
                   <img src="{{ founder.image.url }}" class="w3-round w3-image" alt="{{ founder.title }}" width="600" height="650">
               </div>
               <div class="w3-col m6 w3-padding-large">
-                  <h1 class="w3-center">Meet the {{ founder.title }}</h1><br>
+                  <h1 class="w3-center">{{ founder.title }}</h1><br>
                   <h5 class="w3-center">{{ founder.name }}</h5>
                   <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_1 }}</p>
                   <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_2 }}</p>
@@ -435,7 +436,7 @@
           {% else %}
               <!-- Text on the Left, Image on the Right -->
               <div class="w3-col m6 w3-padding-large">
-                  <h1 class="w3-center">Meet the {{ founder.title }}</h1><br>
+                  <h1 class="w3-center">{{ founder.title }}</h1><br>
                   <h5 class="w3-center">{{ founder.name }}</h5>
                   <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_1 }}</p>
                   <p class="w3-large w3-text-grey w3-hide-medium">{{ founder.description_2 }}</p>
@@ -449,32 +450,136 @@
   {% endfor %}
 </div>
 
-<hr><div style="background-color: #5681a7; border-radius: 40px;">
-  <!-- Meet Our Team Section -->
-  <div class="MeetOurTeamDiv">
-      <h2 class="MeetOurTeam">Meet Our Team</h2>
-      <p class="MeetOurTeamP">
-          Our highly skilled and committed team provide professional services to clients, supporting them in choosing the best options, right places, and countries to fulfill their dreams.
-      </p>
-  </div>
+<style>
+  /* Outer box container */
+  .team-box {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+  }
 
-  <!-- Team Members Section -->
-  <div class="w3-row-padding w3-grayscale">
-    {% for member in team_members %}
-      <div class="w3-col {% if forloop.counter <= 2 %}l6 m6{% else %}l3 m6{% endif %} w3-margin-bottom">
-        <img src="{{ member.image.url }}" alt="{{ member.name }}" style="width:100%" 
-             class="{% if forloop.counter == 1 %}first-image{% elif forloop.counter == 2 %}second-image{% endif %}">
-        <h3>{{ member.name }}</h3>
-        <p class="w3-opacity">{{ member.role }}</p>
-        <p>{{ member.description }}</p>
-        {% if member.contact_link %}
-        <a href="{{ member.contact_link }}"><button class="w3-button w3-light-grey w3-block">Contact</button></a>
-        {% endif %}
+  /* Meet Our Team heading */
+  .team-box h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #333;
+  }
+
+  /* Description paragraph */
+  .team-box p.description {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #555;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  /* General container styling */
+  .team-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+
+  /* Style for larger first two images */
+  .large-image-container {
+      width: 48%; /* Take up nearly half the width */
+      margin: 10px;
+  }
+
+  /* Style for normal-sized images */
+  .normal-image-container {
+      width: 30%; /* Take up one-third the width */
+      margin: 10px;
+  }
+
+  /* First two larger images with specific height */
+  .large-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  /* Normal-sized images with specific height */
+  .normal-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  /* Card styling */
+  .team-card {
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      text-align: center;
+  }
+
+  /* Heading and text styles */
+  .team-card h3 {
+      font-size: 1.5em;
+      margin: 10px 0;
+  }
+
+  .team-card p {
+      margin: 5px 0;
+      font-size: 1em;
+      color: #666;
+  }
+
+  /* Button styling */
+  .team-card button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .team-card button:hover {
+      background-color: #0056b3;
+  }
+</style>
+
+<!-- Team Box -->
+<div class="team-box">
+  <!-- Heading and Description -->
+  <h2>Meet Our Team</h2>
+  <p class="description">
+      Our highly skilled and committed team provides professional services to clients, 
+      supporting them in choosing the best options, right places, and countries to fulfill their dreams.
+  </p>
+
+  <!-- Dynamic Team Members Section -->
+  <div class="team-container">
+      {% for member in team_members %}
+      <div class="{% if forloop.counter <= 2 %}large-image-container{% else %}normal-image-container{% endif %}">
+          <div class="team-card">
+              <!-- Dynamic image from Django model -->
+              <img src="{{ member.image.url }}" alt="{{ member.name }}" 
+                   class="{% if forloop.counter <= 2 %}large-image{% else %}normal-image{% endif %}">
+              <!-- Team member details -->
+              <h3>{{ member.name }}</h3>
+              <p>{{ member.role }}</p>
+              <p>{{ member.description }}</p>
+              <!-- Conditional contact button -->
+              {% if member.contact_link %}
+              <a href="{{ member.contact_link }}"><button>Contact</button></a>
+              {% endif %}
+          </div>
       </div>
-      {% if forloop.counter == 2 %}
-        </div><div class="w3-row-padding w3-grayscale">
-      {% endif %}
-    {% endfor %}
+      {% endfor %}
   </div>
 </div>
 
