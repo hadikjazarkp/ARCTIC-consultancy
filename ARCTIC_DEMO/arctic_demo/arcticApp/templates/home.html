@@ -449,139 +449,163 @@
       <hr style="border-top: 1px solid #ccc;">
   {% endfor %}
 </div>
-
 <style>
-  /* Outer box container */
-  .team-box {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 20px;
-      border: 2px solid #ddd;
-      border-radius: 15px;
-      background-color: #f9f9f9;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      text-align: center;
-  }
+/* Outer box container */
+.team-box {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-  /* Meet Our Team heading */
-  .team-box h2 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      color: #333;
-  }
+/* Meet Our Team heading */
+.team-box h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
 
-  /* Description paragraph */
-  .team-box p.description {
-      font-size: 1.1em;
-      margin-bottom: 30px;
-      color: #555;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-  }
+/* Description paragraph */
+.team-box p.description {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-  /* General container styling */
-  .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-  }
+/* General container styling */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
 
-  /* Style for larger first two images */
-  .large-image-container {
-      width: 48%; /* Take up nearly half the width */
-      margin: 10px;
-  }
+/* Larger image container for the first two members */
+.large-image-container {
+    width: 48%; /* Two images in one row */
+    margin-bottom: 20px;
+}
 
-  /* Style for normal-sized images */
-  .normal-image-container {
-      width: 30%; /* Take up one-third the width */
-      margin: 10px;
-  }
+/* Normal image container for other team members */
+.normal-image-container {
+    width: 30%; /* Three images in one row */
+    margin-bottom: 20px;
+}
 
-  /* First two larger images with specific height */
-  .large-image {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 8px;
-  }
+/* Image styling with common height */
+.team-image {
+    width: 100%;
+    height: 250px; /* Set common height */
+    object-fit: cover; /* Ensure the image scales properly without distortion */
+    border-radius: 8px;
+}
 
-  /* Normal-sized images with specific height */
-  .normal-image {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 8px;
-  }
+/* Card styling */
+.team-card {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
 
-  /* Card styling */
-  .team-card {
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      text-align: center;
-  }
+/* Heading and text styles */
+.team-card h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
 
-  /* Heading and text styles */
-  .team-card h3 {
-      font-size: 1.5em;
-      margin: 10px 0;
-  }
+.team-card p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #666;
+}
 
-  .team-card p {
-      margin: 5px 0;
-      font-size: 1em;
-      color: #666;
-  }
+/* Button styling */
+.team-card button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-  /* Button styling */
-  .team-card button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-  }
+.team-card button:hover {
+    background-color: #0056b3;
+}
 
-  .team-card button:hover {
-      background-color: #0056b3;
-  }
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .large-image-container {
+        width: 100%; /* Full width for large images on smaller screens */
+    }
+
+    .normal-image-container {
+        width: 45%; /* Two images per row for smaller screens */
+    }
+
+    .team-image {
+        height: 220px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .large-image-container, .normal-image-container {
+        width: 100%; /* Single column layout for mobile */
+    }
+
+    .team-box h2 {
+        font-size: 2em; /* Adjust heading size */
+    }
+
+    .team-box p.description {
+        font-size: 1em; /* Adjust paragraph size */
+    }
+
+    .team-image {
+        height: auto; /* Let images resize naturally on mobile */
+    }
+}
+
 </style>
-
 <!-- Team Box -->
 <div class="team-box">
-  <!-- Heading and Description -->
-  <h2>Meet Our Team</h2>
-  <p class="description">
-      Our highly skilled and committed team provides professional services to clients, 
-      supporting them in choosing the best options, right places, and countries to fulfill their dreams.
-  </p>
+    <!-- Heading and Description -->
+    <h2>Meet Our Team</h2>
+    <p class="description">
+        Our highly skilled and committed team provides professional services to clients, 
+        supporting them in choosing the best options, right places, and countries to fulfill their dreams.
+    </p>
 
-  <!-- Dynamic Team Members Section -->
-  <div class="team-container">
-      {% for member in team_members %}
-      <div class="{% if forloop.counter <= 2 %}large-image-container{% else %}normal-image-container{% endif %}">
-          <div class="team-card">
-              <!-- Dynamic image from Django model -->
-              <img src="{{ member.image.url }}" alt="{{ member.name }}" 
-                   class="{% if forloop.counter <= 2 %}large-image{% else %}normal-image{% endif %}">
-              <!-- Team member details -->
-              <h3>{{ member.name }}</h3>
-              <p>{{ member.role }}</p>
-              <p>{{ member.description }}</p>
-              <!-- Conditional contact button -->
-              {% if member.contact_link %}
-              <a href="{{ member.contact_link }}"><button>Contact</button></a>
-              {% endif %}
-          </div>
-      </div>
-      {% endfor %}
-  </div>
+    <!-- Team Members Section -->
+    <div class="team-container">
+        {% for member in team_members %}
+        <div class="{% if forloop.counter <= 2 %}large-image-container{% else %}normal-image-container{% endif %}">
+            <div class="team-card">
+                <!-- Team member image -->
+                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-image">
+                <!-- Team member details -->
+                <h3>{{ member.name }}</h3>
+                <p>{{ member.role }}</p>
+                <p>{{ member.description }}</p>
+                <!-- Conditional contact button -->
+                {% if member.contact_link %}
+                <a href="{{ member.contact_link }}"><button>Contact</button></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
 
 <!-- Styles -->
 <style>

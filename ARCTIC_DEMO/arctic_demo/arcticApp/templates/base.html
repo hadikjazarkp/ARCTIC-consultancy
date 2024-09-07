@@ -89,7 +89,7 @@
         <!-- Navbar (sit on top) -->
         <div class="w3-top">
             <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-                <a href="#home" class="w3-bar-item w3-button">
+                <a href="{% url 'home' %}?ref=logo_click" class="w3-bar-item w3-button">
                     {% with site_logo=site_logo.first %}
                         {% if site_logo %}
                             <img class="w3-image" src="{{ site_logo.image.url }}" alt="Site Logo" style="width:100px">
@@ -98,6 +98,7 @@
                         {% endif %}
                     {% endwith %}
                 </a>
+                
                 <!-- Float links to the right. Hide them on small screens -->
                 <div class="w3-right w3-hide-small">
                     <a href="#home" class="w3-bar-item w3-button">Home</a>
@@ -165,12 +166,18 @@
             <div class="social__icons">
                 <span><i class="ri-facebook-fill"></i></span>
                 <span><i class="ri-twitter-fill"></i></span>
-                <span><i class="ri-instagram-line"></i></span>
+                <a href="https://www.instagram.com/arctic.consultancy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                    <span><i class="ri-instagram-line"></i></span>
+                </a>                
                 <span><i class="ri-linkedin-fill"></i></span>
             </div>
         </div>
     </footer>
-
+<style>
+    a span i {
+        text-decoration: none;
+    }    
+</style>
     <!-- Icon Container -->
     <div class="icon-container">
         <!-- WhatsApp Icon -->

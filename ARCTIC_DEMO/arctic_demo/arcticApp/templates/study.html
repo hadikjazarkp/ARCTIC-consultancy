@@ -456,33 +456,41 @@
   }
 </style>
 
-
 <style>
     .mainDiv {
         margin: auto;
-        width: 50%;
+        width: 100%;
+        max-width: 800px; /* Ensures responsiveness */
+        padding: 20px;
     }
 
     .online-container {
         cursor: pointer;
         font-size: 18px;
         margin-bottom: 10px;
-        color: blue; /* Changed to blue */
+        color: blue;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+    .online-container:hover {
+        background-color: #e0e0e0;
     }
 
     .bullet {
-        margin-right: 10px;
         font-size: 18px;
-        color: blue; /* Bullet color also set to blue */
+        color: blue;
     }
 
     .arrow {
-        margin-left: auto; /* Moves the arrow to the right */
         font-size: 18px;
         transition: transform 0.3s;
-        color: blue; /* Arrow color also set to blue */
+        color: blue;
     }
 
     .arrow.down {
@@ -496,17 +504,16 @@
         border: 1px solid #ccc;
         background-color: #f1f1f1;
         font-size: 16px;
-        width: auto;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-        border-radius: 10px; /* More rounded corners */
-        transition: all 0.3s ease; /* Smooth transition */
+        width: 100%;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        transition: all 0.3s ease;
     }
 
     .content-box {
         padding: 15px;
         background-color: #ffffff;
         border-radius: 10px;
-        margin-top: 15px;
         border: 1px solid #ddd;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -515,7 +522,7 @@
         font-size: 24px;
         margin-bottom: 10px;
         text-align: center;
-        color: #555; /* Icon color */
+        color: #555;
     }
 
     .heading {
@@ -523,7 +530,7 @@
         font-weight: bold;
         margin-bottom: 10px;
         text-align: center;
-        color: #333; /* Heading color */
+        color: #333;
     }
 
     .paragraph-box {
@@ -535,29 +542,53 @@
 
     .paragraph-box p {
         margin: 0 0 10px;
-        color: #666; /* Text color in the paragraph */
+        color: #666;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .mainDiv {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .online-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .icon, .heading {
+            font-size: 18px;
+        }
+
+        .paragraph-box {
+            padding: 10px;
+        }
     }
 </style>
 
 <div class="mainDiv">
     {% for box in content_boxes %}
     <div class="online-container" onclick="toggleDiv('{{ forloop.counter }}')">
-        <span class="bullet"></span> <!-- Bullet point before "Online" -->
-        <span>{{ box.online_text }}</span> <!-- The one-line paragraph -->
-        <span class="arrow"></span> <!-- Upward pointing triangle -->
+        <span class="bullet">•</span>
+        <span>{{ box.online_text }}</span>
+        <span class="arrow"></span>
     </div>
-    
+
     <div id="toggleDiv{{ forloop.counter }}" class="toggleDiv">
         <div class="content-box">
-            <div class="icon">{{ box.icon }}</div> <!-- Icon -->
-            <div class="heading">{{ box.heading }}</div> <!-- Heading -->
+            <div class="icon">{{ box.icon }}</div>
+            <div class="heading">{{ box.heading }}</div>
             <div class="paragraph-box">
-                <p>{{ box.paragraph }}</p> <!-- Single paragraph -->
+                <p>{{ box.paragraph }}</p>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
+
+
 
 <script>
 function toggleDiv(id) {
